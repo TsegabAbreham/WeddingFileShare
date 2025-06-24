@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interactive File Share</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Wedding File Server</h1>
+    <div id="message" class="hidden"></div>
+    <div id="upload-area">
+      <input type="file" id="file-input" />
+      <button id="upload-btn">Upload</button>
+    </div>
+    <h2>Files</h2>
+    <ul id="file-list"></ul>
+  </div>
+
+  <div id="preview-modal" class="hidden">
+    <div id="preview-content">
+      <span id="close-preview">×</span>
+      <div id="media-container"></div>
+      <button id="download-btn">Download</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+<footer>
+    <strong><center><p>© 2025 Wedding File Server Made by Tsegab Abreham</p></center></strong>
+</footer>
+</html>
