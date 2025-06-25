@@ -2,33 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Interactive File Share</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Wedding File Server</h1>
-    <div id="message" class="hidden"></div>
-    <div id="upload-area">
-      <input type="file" id="file-input" />
-      <button id="upload-btn">Upload</button>
-    </div>
-    <h2>Files</h2>
-    <ul id="file-list"></ul>
+  <nav class="sidebar">
+    <h2 class="sidebar-title">Files</h2>
+    <button class="sidebar-toggle-btn" id="sidebar-toggle">☰</button>
+    <button id="btn-upload" class="sidebar-btn active" aria-label="Upload section">📤<span>Upload</span></button>
+    <button id="btn-gallery" class="sidebar-btn" aria-label="Gallery section">🖼️<span>Gallery</span></button>
+  </nav>
+
+  <main class="main-content">
+    <!-- Upload Section -->
+    <section id="section-upload" class="panel active">
+      <center><h1>Upload File</h1></center>
+      <div class="upload-area">
+        <input type="file" id="file-input" aria-label="Choose file" />
+        <button id="upload-btn">Upload</button>
+      </div>
+      <div id="message" role="alert"></div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="section-gallery" class="panel">
+      <center><h1>Your Files</h1></center>
+      <div id="gallery" class="gallery-grid">
+        <!-- Thumbnails injected here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay hidden" aria-hidden="true">
+    <div class="spinner"></div>
   </div>
 
-  <div id="preview-modal" class="hidden">
-    <div id="preview-content">
-      <span id="close-preview">×</span>
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="close-modal" class="modal-close" aria-label="Close preview">×</button>
       <div id="media-container"></div>
-      <button id="download-btn">Download</button>
+      <div class="modal-actions">
+        <a id="download-link" href="#" download><button>Download</button></a>
+        <button id="remove-btn">Remove</button>
+      </div>
     </div>
   </div>
 
+  <script src="sort.js"></script>
   <script src="app.js"></script>
 </body>
-<footer>
-    <strong><center><p>© 2025 Wedding File Server Made by Tsegab Abreham</p></center></strong>
-</footer>
 </html>
