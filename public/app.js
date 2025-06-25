@@ -52,11 +52,13 @@
     );
     if (name === 'gallery') loadGallery();
   }
-  const sidebar      = document.querySelector('.sidebar');
-  const toggleButton = document.getElementById('sidebar-toggle');
-  toggleButton.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
+  const sidebar = document.querySelector('.sidebar');
+  const toggleBtn = document.getElementById('sidebar-toggle');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
   });
+
 
 
   // Upload
@@ -131,6 +133,7 @@
   }
 
   closeModal.onclick = () => modal.classList.add('hidden');
+  
 
   removeBtn.onclick = async () => {
     if (!currentFile) return;
