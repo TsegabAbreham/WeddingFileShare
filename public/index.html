@@ -9,6 +9,7 @@
 <body>
   <nav class="sidebar">
     <h2 class="sidebar-title">Files</h2>
+    <!--- <button id="sidebar-toggle" class="sidebar-btn" aria-label="Toggle sidebar">☰</button> -->
     <button id="btn-upload" class="sidebar-btn active" aria-label="Upload section">📤<span>Upload</span></button>
     <button id="btn-gallery" class="sidebar-btn" aria-label="Gallery section">🖼️<span>Gallery</span></button>
   </nav>
@@ -17,6 +18,9 @@
     <!-- Upload Section -->
     <section id="section-upload" class="panel active">
       <center><h1>Upload File</h1></center>
+      <br>
+      <br>
+      <br>
       <div class="upload-area">
         <input type="file" id="file-input" aria-label="Choose file" />
         <button id="upload-btn">Upload</button>
@@ -27,6 +31,9 @@
     <!-- Gallery Section -->
     <section id="section-gallery" class="panel">
       <center><h1>Available Files</h1></center>
+      <br>
+      <br>
+      <br>
       <div id="gallery" class="gallery-grid">
         <!-- Thumbnails injected here -->
       </div>
@@ -50,7 +57,6 @@
     </div>
   </div>
 
-  <script src="sort.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

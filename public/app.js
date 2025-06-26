@@ -1,4 +1,4 @@
-(async () => {
+document.addEventListener('DOMContentLoaded', () => {
   // Fetch helper
   async function api(path, opts = {}) {
     try {
@@ -29,6 +29,8 @@
   const downloadLink  = document.getElementById('download-link');
   const removeBtn     = document.getElementById('remove-btn');
   const closeModal    = document.getElementById('close-modal');
+  const sidebar      = document.querySelector('.sidebar');
+  const toggleBtn    = document.getElementById('sidebar-toggle');
 
   let currentFile = null;
 
@@ -41,7 +43,7 @@
     setTimeout(() => msgEl.textContent = '', 3000);
   }
 
-  // Navigation
+  // Navigation buttons
   navUpload.addEventListener('click',  () => switchPanel('upload'));
   navGallery.addEventListener('click', () => switchPanel('gallery'));
   function switchPanel(name) {
@@ -52,17 +54,17 @@
     );
     if (name === 'gallery') loadGallery();
   }
-  const sidebar = document.querySelector('.sidebar');
-  const toggleBtn = document.getElementById('sidebar-toggle');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+  // Sidebar toggle (optional, safe check)
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+  }
 
-
-
-  // Upload
+  // Upload button
   uploadBtn.addEventListener('click', async () => {
+    console.log('Upload clicked');
     if (!fileInput.files.length) return showMessage('Select a file', 'error');
     const form = new FormData();
     form.append('file', fileInput.files[0]);
@@ -77,7 +79,7 @@
     }
   });
 
-  // Load gallery with Drive thumbnails
+  // Load gallery thumbnails
   async function loadGallery() {
     galleryEl.innerHTML = '';
     showLoading(true);
@@ -91,17 +93,13 @@
       const thumb = document.createElement('div');
       thumb.className = 'thumb';
 
-      // thumbnail image
       const img = document.createElement('img');
       img.src = `https://drive.google.com/thumbnail?sz=200&id=${f.id}`;
       img.alt = f.name;
-
-      // **NEW**: ensure the img actually occupies space
       img.style.width  = '100%';
       img.style.height = 'auto';
 
       img.onerror = () => {
-        // fallback to full view if thumbnail not available
         img.src = `https://drive.google.com/thumbnail?sz=200&id=${f.id}&_=${Date.now()}`;
       };
 
@@ -115,7 +113,7 @@
     });
   }
 
-  // Preview in modal (unchanged)
+  // Preview modal
   function previewFile(f) {
     currentFile = f;
     mediaContainer.innerHTML = '';
@@ -132,10 +130,15 @@
     modal.classList.remove('hidden');
   }
 
-  closeModal.onclick = () => modal.classList.add('hidden');
-  
+  // Close modal button
+  closeModal.onclick = () => {
+    console.log('Close modal clicked');
+    modal.classList.add('hidden');
+  };
 
+  // Remove button
   removeBtn.onclick = async () => {
+    console.log('Remove clicked');
     if (!currentFile) return;
     const pwd = prompt('Password to delete:');
     if (pwd == null) return;
@@ -155,6 +158,6 @@
     }
   };
 
-  // Initialize
+  // Initialize view
   switchPanel('upload');
-})();
+});
